@@ -243,7 +243,7 @@ class DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       body: GestureDetector(
         child: Center(
-            child: Hero(tag: "caelid", child: Image.asset(widget.image))),
+            child: Hero(tag: "caelid", child: Image.asset(widget.image,scale: 0.5,))),
         onTap: () {
           Navigator.pop(context);
         },
