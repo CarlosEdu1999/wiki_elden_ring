@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +27,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.lime,
       ),
       home: const MyHomePage(title: 'Elden Ring Wiki'),
-
     );
   }
 }
@@ -63,11 +63,9 @@ class _MyHomePageState extends State<MyHomePage> {
     'assets/images/rio_siofa.jpg',
     'assets/images/rio_ansiel.jpg',
     'assets/images/weeping_peninsula.jpg'
-
-
-
-
   ];
+   late YoutubePlayerController controller;
+
 
   void _proximaRota() {
     setState(() {
@@ -76,6 +74,26 @@ class _MyHomePageState extends State<MyHomePage> {
         MaterialPageRoute(builder: (context) => const SecondRota()),
       );
     });
+  }
+  @override
+  void initState() {
+    super.initState();
+
+    String url = "https://www.youtube.com/watch?v=dwHL7cPLGYE&ab_channel=CanalCanalha";
+    controller = YoutubePlayerController(
+      initialVideoId: YoutubePlayer.convertUrlToId(url)!,
+      flags: const YoutubePlayerFlags(
+          mute: false,
+          autoPlay: true,
+          disableDragSeek: false,
+          loop: false,
+          isLive: false,
+          forceHD: false,
+          enableCaption: true,
+      ),
+    );
+
+
   }
 
   @override
@@ -95,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
       ),
 
-      body: Center(
+      body: SingleChildScrollView(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
@@ -115,41 +133,45 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Image.asset('assets/images/elden_ring.jpg')
-            ,
+            Image.asset('assets/images/elden_ring.jpg'),
             const Text(
               '\nO Maculado em breve voltará',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-
             ),
             const Text(
               '\nElden Ring é um RPG de fantasia sombria que permite que você jogue '
-                  'um dos descendentes dos Maculados. Um pária, você deve entrar nas '
-                  'Terras Intermediárias para tentar ser readmitido na sociedade de lá '
-                  'como um Elden Lord. \nPara fazer isso, você deve revelar o mistério do '
-                  'lendário Elden Ring. Suas aventuras nas Terras Intermediárias estarão repletas'
-                  ' de ameaças e cheias de desconhecidos. \nOnde quer que você vá, você terá a oportunidade'
-                  ' de personalizar quase todos os aspectos do seu personagem, de classe a armadura e armamento.'
-                  ' \nE você terá grande liberdade sobre onde, exatamente, você anda e como você interage com os'
-                  ' personagens que encontra ao longo do caminho.',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal,
-                    leadingDistribution: TextLeadingDistribution.even),
-
-
+              'um dos descendentes dos Maculados. Um pária, você deve entrar nas '
+              'Terras Intermediárias para tentar ser readmitido na sociedade de lá '
+              'como um Elden Lord. \nPara fazer isso, você deve revelar o mistério do '
+              'lendário Elden Ring. Suas aventuras nas Terras Intermediárias estarão repletas'
+              ' de ameaças e cheias de desconhecidos. \nOnde quer que você vá, você terá a oportunidade'
+              ' de personalizar quase todos os aspectos do seu personagem, de classe a armadura e armamento.'
+              ' \nE você terá grande liberdade sobre onde, exatamente, você anda e como você interage com os'
+              ' personagens que encontra ao longo do caminho.',
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                  leadingDistribution: TextLeadingDistribution.even),
             ),
-
+            Container(
+              child:YoutubePlayer(
+              controller: controller,
+              liveUIColor: Colors.amber,
+            ) ,)
 
           ],
         ),
       ),
+
       floatingActionButton: FloatingActionButton(
-        onPressed:_proximaRota,
-        tooltip: 'Increment',
+        onPressed: _proximaRota,
+        tooltip: 'Maps',
         child: const Icon(Icons.map_outlined),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+
 class SecondRota extends StatelessWidget {
   const SecondRota({Key? key}) : super(key: key);
 
@@ -166,10 +188,7 @@ class SecondRota extends StatelessWidget {
     'assets/images/rio_siofa.jpg',
     'assets/images/rio_ansiel.jpg',
     'assets/images/weeping_peninsula.jpg'
-
-
   ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -187,28 +206,19 @@ class SecondRota extends StatelessWidget {
               mainAxisSpacing: 10,
               crossAxisCount: 2,
               children: <Widget>[
-                for(String item in images)
-                InkWell(
-                    child:
-                    Container(
-
-                        padding:  EdgeInsets.all( images.length.toDouble()),
-
-                        decoration:  BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage(item)),
-
-                        )
-                    ),
-                    onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return DetailScreen(item);
-                    }));
-                    })
-
-
-
+                for (String item in images)
+                  InkWell(
+                      child: Container(
+                          padding: EdgeInsets.all(images.length.toDouble()),
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.fill, image: AssetImage(item)),
+                          )),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) {
+                          return DetailScreen(item);
+                        }));
+                      })
               ],
             ),
           ),
@@ -220,6 +230,7 @@ class SecondRota extends StatelessWidget {
 
 class DetailScreen extends StatefulWidget {
   late String image;
+
   DetailScreen(this.image);
 
   @override
@@ -227,20 +238,12 @@ class DetailScreen extends StatefulWidget {
 }
 
 class DetailScreenState extends State<DetailScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
         child: Center(
-          child: Hero(
-
-              tag: "caelid",
-              child: Image.asset(widget.image))
-          ),
-
-
+            child: Hero(tag: "caelid", child: Image.asset(widget.image))),
         onTap: () {
           Navigator.pop(context);
         },
@@ -248,3 +251,5 @@ class DetailScreenState extends State<DetailScreen> {
     );
   }
 }
+
+
