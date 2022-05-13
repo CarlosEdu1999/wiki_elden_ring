@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    String url = "https://www.youtube.com/watch?v=dwHL7cPLGYE&ab_channel=CanalCanalha";
+    String url = "https://www.youtube.com/watch?v=AKXiKBnzpBQ&ab_channel=GameSpot";
     controller = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(url)!,
       flags: const YoutubePlayerFlags(
