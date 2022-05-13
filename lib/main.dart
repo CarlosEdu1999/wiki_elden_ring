@@ -153,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
 class SecondRota extends StatelessWidget {
   const SecondRota({Key? key}) : super(key: key);
 
-  static var image = [
+  static var images = [
     'assets/images/caelid.jpg',
     'assets/images/Consecrated_Snowfield.jpg',
     'assets/images/crumbling_farum_azula.jpg',
@@ -187,234 +187,27 @@ class SecondRota extends StatelessWidget {
               mainAxisSpacing: 10,
               crossAxisCount: 2,
               children: <Widget>[
+                for(String item in images)
                 InkWell(
                     child:
                     Container(
 
-                        padding: const EdgeInsets.all(12),
+                        padding:  EdgeInsets.all( images.length.toDouble()),
 
-                        decoration: const BoxDecoration(
+                        decoration:  BoxDecoration(
                           image: DecorationImage(
                               fit: BoxFit.fill,
-                              image: AssetImage('assets/images/caelid.jpg')),
+                              image: AssetImage(item)),
 
                         )
                     ),
-
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return DetailScreen();
-                      }));
-                    }),
-                InkWell(
-                    child:
-                    Container(
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                    return DetailScreen(item);
+                    }));
+                    })
 
-                        padding: const EdgeInsets.all(12),
 
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/images/Consecrated_Snowfield.jpg')),
-
-                        )
-                    ),
-
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return DetailScreen2();
-                      }));
-                    }),
-                InkWell(
-                    child:
-                    Container(
-
-                        padding: const EdgeInsets.all(12),
-
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/images/crumbling_farum_azula.jpg')),
-
-                        )
-                    ),
-
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return DetailScreen3();
-                      }));
-                    }),
-                InkWell(
-                    child:
-                    Container(
-
-                        padding: const EdgeInsets.all(12),
-
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/images/deeprot_depths.jpg')),
-
-                        )
-                    ),
-
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return DetailScreen4();
-                      }));
-                    }),
-                InkWell(
-                    child:
-                    Container(
-
-                        padding: const EdgeInsets.all(12),
-
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/images/lake_of_rot.jpg')),
-
-                        )
-                    ),
-
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return DetailScreen5();
-                      }));
-                    }),
-                InkWell(
-                    child:
-                    Container(
-
-                        padding: const EdgeInsets.all(12),
-
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/images/limgrave.jpg')),
-
-                        )
-                    ),
-
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return DetailScreen6();
-                      }));
-                    }),
-                InkWell(
-                    child:
-                    Container(
-
-                        padding: const EdgeInsets.all(12),
-
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/images/liurnia.jpg')),
-
-                        )
-                    ),
-
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return DetailScreen7();
-                      }));
-                    }),
-                InkWell(
-                    child:
-                    Container(
-
-                        padding: const EdgeInsets.all(12),
-
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/images/monta_dos_gigante.jpg')),
-
-                        )
-                    ),
-
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return DetailScreen8();
-                      }));
-                    }),
-                InkWell(
-                    child:
-                    Container(
-
-                        padding: const EdgeInsets.all(12),
-
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/images/plato_altus.jpg')),
-
-                        )
-                    ),
-
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return DetailScreen9();
-                      }));
-                    }),
-                InkWell(
-                    child:
-                    Container(
-
-                        padding: const EdgeInsets.all(12),
-
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/images/rio_siofa.jpg')),
-
-                        )
-                    ),
-
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return DetailScreen10();
-                      }));
-                    }),
-                InkWell(
-                    child:
-                    Container(
-
-                        padding: const EdgeInsets.all(12),
-
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/images/rio_ansiel.jpg')),
-
-                        )
-                    ),
-
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return DetailScreen11();
-                      }));
-                    }),
-                InkWell(
-                    child:
-                    Container(
-
-                        padding: const EdgeInsets.all(12),
-
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/images/weeping_peninsula.jpg')),
-
-                        )
-                    ),
-
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return DetailScreen12();
-                      }));
-                    }),
 
               ],
             ),
@@ -424,7 +217,18 @@ class SecondRota extends StatelessWidget {
     );
   }
 }
-class DetailScreen extends StatelessWidget {
+
+class DetailScreen extends StatefulWidget {
+  late String image;
+  DetailScreen(this.image);
+
+  @override
+  DetailScreenState createState() => DetailScreenState();
+}
+
+class DetailScreenState extends State<DetailScreen> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -433,228 +237,8 @@ class DetailScreen extends StatelessWidget {
           child: Hero(
 
               tag: "caelid",
-              child: Image.asset('assets/images/caelid.jpg'))
+              child: Image.asset(widget.image))
           ),
-
-
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
-    );
-  }
-}
-class DetailScreen2 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        child: Center(
-            child: Hero(
-
-                tag: "caelid",
-                child: Image.asset('assets/images/Consecrated_Snowfield.jpg'))
-        ),
-
-
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
-    );
-  }
-}
-class DetailScreen3 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        child: Center(
-            child: Hero(
-
-                tag: "caelid",
-                child: Image.asset('assets/images/crumbling_farum_azula.jpg'))
-        ),
-
-
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
-    );
-  }
-}
-class DetailScreen4 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        child: Center(
-            child: Hero(
-
-                tag: "caelid",
-                child: Image.asset('assets/images/deeprot_depths.jpg'))
-        ),
-
-
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
-    );
-  }
-}
-class DetailScreen5 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        child: Center(
-            child: Hero(
-
-                tag: "caelid",
-                child: Image.asset('assets/images/lake_of_rot.jpg'))
-        ),
-
-
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
-    );
-  }
-}
-class DetailScreen6 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        child: Center(
-            child: Hero(
-
-                tag: "caelid",
-                child: Image.asset('assets/images/limgrave.jpg'))
-        ),
-
-
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
-    );
-  }
-}
-class DetailScreen7 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        child: Center(
-            child: Hero(
-
-                tag: "caelid",
-                child: Image.asset('assets/images/liurnia.jpg'))
-        ),
-
-
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
-    );
-  }
-}
-class DetailScreen8 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        child: Center(
-            child: Hero(
-
-                tag: "caelid",
-                child: Image.asset('assets/images/monta_dos_gigante.jpg'))
-        ),
-
-
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
-    );
-  }
-}
-class DetailScreen9 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        child: Center(
-            child: Hero(
-
-                tag: "caelid",
-                child: Image.asset('assets/images/plato_altus.jpg'))
-        ),
-
-
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
-    );
-  }
-}
-class DetailScreen10 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        child: Center(
-            child: Hero(
-
-                tag: "caelid",
-                child: Image.asset('assets/images/rio_siofa.jpg'))
-        ),
-
-
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
-    );
-  }
-}
-class DetailScreen11 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        child: Center(
-            child: Hero(
-
-                tag: "caelid",
-                child: Image.asset('assets/images/rio_ansiel.jpg'))
-        ),
-
-
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
-    );
-  }
-}
-class DetailScreen12 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        child: Center(
-            child: Hero(
-
-                tag: "caelid",
-                child: Image.asset('assets/images/weeping_peninsula.jpg'))
-        ),
 
 
         onTap: () {
