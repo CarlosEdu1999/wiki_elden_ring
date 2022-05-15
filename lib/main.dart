@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
+import 'itemsPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -75,6 +78,16 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     });
   }
+  void _itemRota() {
+    setState(() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) =>  ItemsRota()),
+      );
+    });
+  }
+
+
   @override
   void initState() {
     super.initState();
@@ -163,12 +176,25 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
 
-      floatingActionButton: FloatingActionButton(
+
+    floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: Container(
+        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10.0),
+        child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+        FloatingActionButton(
         onPressed: _proximaRota,
-        tooltip: 'Maps',
-        child: const Icon(Icons.map_outlined),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        child: Icon(Icons.map),
+        ),
+        FloatingActionButton(
+        onPressed: _itemRota,
+        child: Icon(MdiIcons.sword),
+        ),
+        ],
+        ),
+        ),// This trailing comma makes auto-formatting nicer for build methods.
+        );
   }
 }
 
