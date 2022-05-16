@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) =>  ItemsRota()),
+        MaterialPageRoute(builder: (context) =>  const itemsRota()),
       );
     });
   }
@@ -90,14 +90,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    super.initState();
 
     String url = "https://www.youtube.com/watch?v=AKXiKBnzpBQ&ab_channel=GameSpot";
     controller = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(url)!,
       flags: const YoutubePlayerFlags(
           mute: false,
-          autoPlay: true,
+          autoPlay: false,
           disableDragSeek: false,
           loop: false,
           isLive: false,
@@ -105,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
           enableCaption: true,
       ),
     );
-
+    super.initState();
 
   }
 
@@ -167,6 +166,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   leadingDistribution: TextLeadingDistribution.even),
             ),
             Container(
+              width: MediaQuery.of(context).size.width *1,
+              height: MediaQuery.of(context).size.height *0.60,
               child:YoutubePlayer(
               controller: controller,
               liveUIColor: Colors.amber,
@@ -184,12 +185,14 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
         FloatingActionButton(
+          heroTag: "%4",
         onPressed: _proximaRota,
-        child: Icon(Icons.map),
+        child: const Icon(Icons.map),
         ),
         FloatingActionButton(
+          heroTag: "%%%",
         onPressed: _itemRota,
-        child: Icon(MdiIcons.sword),
+        child: const Icon(MdiIcons.sword),
         ),
         ],
         ),
@@ -269,7 +272,7 @@ class DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       body: GestureDetector(
         child: Center(
-            child: Hero(tag: "caelid", child: Image.asset(widget.image,scale: 0.5,))),
+             child: Image.asset(widget.image,scale: 0.5,)),
         onTap: () {
           Navigator.pop(context);
         },
