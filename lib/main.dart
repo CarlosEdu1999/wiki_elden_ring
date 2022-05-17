@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
     'assets/images/rio_ansiel.jpg',
     'assets/images/weeping_peninsula.jpg'
   ];
-   late YoutubePlayerController controller;
+  late YoutubePlayerController controller;
 
 
   void _proximaRota() {
@@ -78,11 +78,12 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     });
   }
+
   void _itemRota() {
     setState(() {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) =>  const itemsRota()),
+        MaterialPageRoute(builder: (context) => const itemsRota()),
       );
     });
   }
@@ -90,195 +91,318 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-
     String url = "https://www.youtube.com/watch?v=AKXiKBnzpBQ&ab_channel=GameSpot";
     controller = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(url)!,
       flags: const YoutubePlayerFlags(
-          mute: false,
-          autoPlay: false,
-          disableDragSeek: false,
-          loop: false,
-          isLive: false,
-          forceHD: false,
-          enableCaption: true,
+        mute: false,
+        autoPlay: false,
+        disableDragSeek: false,
+        loop: false,
+        isLive: false,
+        forceHD: false,
+        enableCaption: false,
       ),
     );
     super.initState();
-
   }
 
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-
-        title: Text(widget.title),
-        centerTitle: true,
+  Container _getBackground() {
+    return Container(
+      child: Image.network(
+        'https://i0.wp.com/metagalaxia.com.br/wp-content/uploads/2022/02/Elden-Ring-capa-1.webp?w=1280&ssl=1',
+        fit: BoxFit.cover,
+        height: 300.0,
       ),
+      constraints: const BoxConstraints.expand(height: 300.0),
+    );
+  }
 
-      body: SingleChildScrollView(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Image.asset('assets/images/elden_ring.jpg'),
+  Widget _getContent() {
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(0.0, 72.0, 0.0, 32.0),
+      children: <Widget>[
+        Container(
+
+          height: 154.0,
+          margin: const EdgeInsets.only(top: 72.0),
+          decoration: BoxDecoration(
+
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(8.0),
+            boxShadow: const <BoxShadow>[
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 10.0,
+                offset: Offset(0.0, 10.0),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          child: Column(children:  [
             const Text(
-              '\nO Maculado em breve voltará',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              '\nElden Ring Wiki',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
             const Text(
+              '\nHistória: O Maculado em breve voltará',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+
+            const Text(
               '\nElden Ring é um RPG de fantasia sombria que permite que você jogue '
-              'um dos descendentes dos Maculados. Um pária, você deve entrar nas '
-              'Terras Intermediárias para tentar ser readmitido na sociedade de lá '
-              'como um Elden Lord. \nPara fazer isso, você deve revelar o mistério do '
-              'lendário Elden Ring. Suas aventuras nas Terras Intermediárias estarão repletas'
-              ' de ameaças e cheias de desconhecidos. \nOnde quer que você vá, você terá a oportunidade'
-              ' de personalizar quase todos os aspectos do seu personagem, de classe a armadura e armamento.'
-              ' \nE você terá grande liberdade sobre onde, exatamente, você anda e como você interage com os'
-              ' personagens que encontra ao longo do caminho.',
+                  'um dos descendentes dos Maculados. Um pária, você deve entrar nas '
+                  'Terras Intermediárias para tentar ser readmitido na sociedade de lá '
+                  'como um Elden Lord. \nPara fazer isso, você deve revelar o mistério do '
+                  'lendário Elden Ring. Suas aventuras nas Terras Intermediárias estarão repletas'
+                  ' de ameaças e cheias de desconhecidos. \nOnde quer que você vá, você terá a oportunidade'
+                  ' de personalizar quase todos os aspectos do seu personagem, de classe a armadura e armamento.'
+                  ' \nE você terá grande liberdade sobre onde, exatamente, você anda e como você interage com os'
+                  ' personagens que encontra ao longo do caminho.',
               style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.normal,
-                  leadingDistribution: TextLeadingDistribution.even),
+                  leadingDistribution: TextLeadingDistribution.proportional),
             ),
-            Container(
-              width: MediaQuery.of(context).size.width *1,
-              height: MediaQuery.of(context).size.height *0.60,
+            SizedBox(height: 20,),
+            SizedBox(
+
               child:YoutubePlayer(
               controller: controller,
               liveUIColor: Colors.amber,
             ) ,)
+          ]),
+          height: 900,
+          margin: const EdgeInsets.only(top: 72.0),
+          decoration: BoxDecoration(
 
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(8.0),
+            boxShadow: const <BoxShadow>[
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 10.0,
+                offset: Offset(0.0, 10.0),
+              ),
+            ],
+          ),
+        ),
+
+
+      ],
+    );
+  }
+
+  Container _getGradient() {
+    return Container(
+      margin: const EdgeInsets.only(top: 190.0),
+      height: 110.0,
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: <Color>[
+            Color(0x00736AB7),
+            Color(0xFF736AB7)
           ],
+          stops: [0.0, 0.9],
+          begin: FractionalOffset(0.0, 0.0),
+          end: FractionalOffset(0.0, 1.0),
         ),
       ),
-
-
-    floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Container(
-        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10.0),
-        child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-        FloatingActionButton(
-          heroTag: "%4",
-        onPressed: _proximaRota,
-        child: const Icon(Icons.map),
-        ),
-        FloatingActionButton(
-          heroTag: "%%%",
-        onPressed: _itemRota,
-        child: const Icon(MdiIcons.sword),
-        ),
-        ],
-        ),
-        ),// This trailing comma makes auto-formatting nicer for build methods.
-        );
+    );
   }
-}
-
-class SecondRota extends StatelessWidget {
-  const SecondRota({Key? key}) : super(key: key);
-
-  static var images = [
-    'assets/images/caelid.jpg',
-    'assets/images/Consecrated_Snowfield.jpg',
-    'assets/images/crumbling_farum_azula.jpg',
-    'assets/images/deeprot_depths.jpg',
-    'assets/images/lake_of_rot.jpg',
-    'assets/images/limgrave.jpg',
-    'assets/images/liurnia.jpg',
-    'assets/images/monta_dos_gigante.jpg',
-    'assets/images/plato_altus.jpg',
-    'assets/images/rio_siofa.jpg',
-    'assets/images/rio_ansiel.jpg',
-    'assets/images/weeping_peninsula.jpg'
-  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Mapas"),
-      ),
-      body: CustomScrollView(
-        primary: false,
-        slivers: <Widget>[
-          SliverPadding(
-            padding: const EdgeInsets.all(20),
-            sliver: SliverGrid.count(
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 2,
-              children: <Widget>[
-                for (String item in images)
-                  InkWell(
-                      child: Container(
-                          padding: EdgeInsets.all(images.length.toDouble()),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                fit: BoxFit.fill, image: AssetImage(item)),
-                          )),
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) {
-                          return DetailScreen(item);
-                        }));
-                      })
-              ],
-            ),
+        body: Container(
+          constraints: BoxConstraints.expand(),
+          color: Color(0xFF736AB7),
+          child: Stack(
+            children: <Widget>[
+              _getBackground(),
+              _getGradient(),
+              _getContent(),
+
+            ],
           ),
-        ],
-      ),
-    );
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: Container(
+            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  FloatingActionButton(
+                    backgroundColor: Color(0xFF736AB7),
+                    heroTag: "%4",
+                    onPressed: _proximaRota,
+                    child: const Icon(Icons.map),
+                  ),
+                  FloatingActionButton(
+                    backgroundColor: Color(0xFF736AB7),
+                    heroTag: "%%%",
+                    onPressed: _itemRota,
+                    child: const Icon(MdiIcons.sword),
+                  )
+                ])));
   }
 }
+//   @override
+//   Widget build(BuildContext context) {
+//     // This method is rerun every time setState is called, for instance as done
+//     // by the _incrementCounter method above.
+//     //
+//     // The Flutter framework has been optimized to make rerunning build methods
+//     // fast, so that you can just rebuild anything that needs updating rather
+//     // than having to individually change instances of widgets.
+//     return Scaffold(
+//       appBar: AppBar(
+//         // Here we take the value from the MyHomePage object that was created by
+//         // the App.build method, and use it to set our appbar title.
+//
+//         title: Text(widget.title),
+//         centerTitle: true,
+//       ),
+//
+//       body: SingleChildScrollView(
+//         // Center is a layout widget. It takes a single child and positions it
+//         // in the middle of the parent.
+//         child: Column(
+//           // Column is also a layout widget. It takes a list of children and
+//           // arranges them vertically. By default, it sizes itself to fit its
+//           // children horizontally, and tries to be as tall as its parent.
+//           //
+//           // Invoke "debug painting" (press "p" in the console, choose the
+//           // "Toggle Debug Paint" action from the Flutter Inspector in Android
+//           // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+//           // to see the wireframe for each widget.
+//           //
+//           // Column has various properties to control how it sizes itself and
+//           // how it positions its children. Here we use mainAxisAlignment to
+//           // center the children vertically; the main axis here is the vertical
+//           // axis because Columns are vertical (the cross axis would be
+//           // horizontal).
+//           mainAxisAlignment: MainAxisAlignment.start,
+//           children: <Widget>[
+//             Image.asset('assets/images/elden_ring.jpg'),
+//             const Text(
+//               '\nO Maculado em breve voltará',
+//               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+//             ),
+//             const Text(
+//               '\nElden Ring é um RPG de fantasia sombria que permite que você jogue '
+//               'um dos descendentes dos Maculados. Um pária, você deve entrar nas '
+//               'Terras Intermediárias para tentar ser readmitido na sociedade de lá '
+//               'como um Elden Lord. \nPara fazer isso, você deve revelar o mistério do '
+//               'lendário Elden Ring. Suas aventuras nas Terras Intermediárias estarão repletas'
+//               ' de ameaças e cheias de desconhecidos. \nOnde quer que você vá, você terá a oportunidade'
+//               ' de personalizar quase todos os aspectos do seu personagem, de classe a armadura e armamento.'
+//               ' \nE você terá grande liberdade sobre onde, exatamente, você anda e como você interage com os'
+//               ' personagens que encontra ao longo do caminho.',
+//               style: TextStyle(
+//                   fontSize: 16,
+//                   fontWeight: FontWeight.normal,
+//                   leadingDistribution: TextLeadingDistribution.even),
+//             ),
+//             Container(
+//               width: MediaQuery.of(context).size.width *1,
+//               height: MediaQuery.of(context).size.height *0.60,
+//               child:YoutubePlayer(
+//               controller: controller,
+//               liveUIColor: Colors.amber,
+//             ) ,)
+//
+//           ],
+//         ),
+//       ),
+//
+//
 
-class DetailScreen extends StatefulWidget {
+
+
+  class SecondRota extends StatelessWidget {
+  const SecondRota({Key? key}) : super(key: key);
+
+  static var images = [
+  'assets/images/caelid.jpg',
+  'assets/images/Consecrated_Snowfield.jpg',
+  'assets/images/crumbling_farum_azula.jpg',
+  'assets/images/deeprot_depths.jpg',
+  'assets/images/lake_of_rot.jpg',
+  'assets/images/limgrave.jpg',
+  'assets/images/liurnia.jpg',
+  'assets/images/monta_dos_gigante.jpg',
+  'assets/images/plato_altus.jpg',
+  'assets/images/rio_siofa.jpg',
+  'assets/images/rio_ansiel.jpg',
+  'assets/images/weeping_peninsula.jpg'
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: Color(0xFF736AB7),
+  appBar: AppBar(
+    backgroundColor: Color(0xFF736AB7),
+  title: const Text("Mapas"),
+  ),
+  body: CustomScrollView(
+  primary: false,
+  slivers: <Widget>[
+  SliverPadding(
+  padding: const EdgeInsets.all(20),
+  sliver: SliverGrid.count(
+  crossAxisSpacing: 10,
+  mainAxisSpacing: 10,
+  crossAxisCount: 2,
+  children: <Widget>[
+  for (String item in images)
+  InkWell(
+  child: Container(
+  padding: EdgeInsets.all(images.length.toDouble()),
+  decoration: BoxDecoration(
+  image: DecorationImage(
+  fit: BoxFit.fill, image: AssetImage(item)),
+  )),
+  onTap: () {
+  Navigator.push(context, MaterialPageRoute(builder: (_) {
+  return DetailScreen(item);
+  }));
+  })
+  ],
+  ),
+  ),
+  ],
+  ),
+  );
+  }
+  }
+
+  class DetailScreen extends StatefulWidget {
   late String image;
 
   DetailScreen(this.image);
 
   @override
   DetailScreenState createState() => DetailScreenState();
-}
+  }
 
-class DetailScreenState extends State<DetailScreen> {
+  class DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        child: Center(
-             child: Image.asset(widget.image,scale: 0.5,)),
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
-    );
+  return Scaffold(
+  body: GestureDetector(
+  child: Center(
+  child: Image.asset(widget.image,scale: 0.5,)),
+  onTap: () {
+  Navigator.pop(context);
+  },
+  ),
+  );
   }
-}
+  }
 
 

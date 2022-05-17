@@ -10,7 +10,7 @@ import 'package:http/http.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import 'main.dart';
+import 'main.dart' as main;
 import 'data_connection.dart';
 
 
@@ -62,7 +62,9 @@ class _itemsRotaState extends State<itemsRota> {
 
         if (snapshot.hasData) {
           return Scaffold(
+            backgroundColor: Color(0xFF736AB7),
             appBar: AppBar(
+              backgroundColor: Color(0xFF736AB7),
               title: const Text("Items"),
             ),
 
@@ -129,12 +131,33 @@ class itemDetail extends StatefulWidget {
 
 class itemDetailScreenState extends State<itemDetail> {
 
+  late YoutubePlayerController controller;
+  @override
+  void initState() {
+    String url = widget.item['videoURL'];
+    controller = YoutubePlayerController(
+      initialVideoId: YoutubePlayer.convertUrlToId(url)!,
+      flags: const YoutubePlayerFlags(
+        mute: false,
+        autoPlay: false,
+        disableDragSeek: false,
+        loop: false,
+        isLive: false,
+        forceHD: false,
+        enableCaption: false,
+      ),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      backgroundColor: Color(0xFF736AB7),
+
         appBar:  AppBar(
-          title:  Text(widget.item['nome']),
+          backgroundColor: Color(0xFF736AB7),
+          title:  Text('Descrição da Arma'),
         ),
         body:  ListView(
             children: <Widget>[
@@ -142,6 +165,7 @@ class itemDetailScreenState extends State<itemDetail> {
                   NetworkImage(widget.item['imageURL']).url,),
 
                Container(
+
                 padding: const EdgeInsets.all(32.0),
                 child:  Row(
                   children: [
@@ -167,6 +191,7 @@ class itemDetailScreenState extends State<itemDetail> {
 
                               ),
                             ),
+                            SizedBox(height: 50,)
 
                           ]
                           ),
@@ -180,14 +205,14 @@ class itemDetailScreenState extends State<itemDetail> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                              "Weapon Range : " + widget.item['alcanceDaArma'],
+                              "Alcance da Arma : " + widget.item['alcanceDaArma'],
                               style:  const TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                               Text(
-                              "category : " +widget.item['categoria'],
+                              "Categoria : " +widget.item['categoria'],
                               style:  const TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -202,14 +227,14 @@ class itemDetailScreenState extends State<itemDetail> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                "Weigth : " + widget.item['peso'].toString(),
+                                "Localização : " + widget.item['location'],
                                 style:  const TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
-                                "Skill : " +widget.item['skill'],
+                                "Habilidade : " +widget.item['skill'],
                                 style:  const TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -224,19 +249,20 @@ class itemDetailScreenState extends State<itemDetail> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                "Weigth : " + widget.item['peso'].toString(),
+                                "Peso : " + widget.item['peso'].toString(),
                                 style:  const TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
-                                "category : " +widget.item['categoria'],
+                                "Custo de Estamina : " +widget.item['fpCost'],
                                 style:  const TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                 ),
                               )],),),
+
                         ],
                       ),
                     ),
@@ -244,7 +270,82 @@ class itemDetailScreenState extends State<itemDetail> {
 
                   ],
                 ),
-              )
+              ),
+              const Text('Dano',style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.bold
+              ),
+              textAlign: TextAlign.center,),
+              DataTable(
+
+                  columns: const [
+                    DataColumn(label: Text('Físico')),
+                    DataColumn(label: Text('Mágico')),
+                    DataColumn(label: Text('Fogo')),
+                    DataColumn(label: Text('Elétrico')),
+                    DataColumn(label: Text('Sagrado')),
+                    DataColumn(label: Text('Crítico')),
+
+                  ],
+                  columnSpacing: 20.0,
+
+                  rows: <DataRow>[
+                    DataRow(cells: [
+                      DataCell(Text(widget.item['dano']['physical'].toString())),
+                      DataCell(Text(widget.item['dano']['magic'].toString())),
+                      DataCell(Text(widget.item['dano']['fire'].toString())),
+                      DataCell(Text(widget.item['dano']['lightining'].toString())),
+                      DataCell(Text(widget.item['dano']['holy'].toString())),
+                      DataCell(Text(widget.item['dano']['critical'].toString())),
+                    ])
+
+                  ]),
+              const Text('Defesa',style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+              ),
+                textAlign: TextAlign.center,),
+              DataTable(
+
+                  columns: const [
+                    DataColumn(label: Text('Físico')),
+                    DataColumn(label: Text('Mágico')),
+                    DataColumn(label: Text('Fogo')),
+                    DataColumn(label: Text('Elétrico')),
+                    DataColumn(label: Text('Sagrado')),
+                    DataColumn(label: Text('Crítico')),
+
+                  ],
+                  columnSpacing: 20.0,
+
+                  rows: <DataRow>[
+                    DataRow(cells: [
+                      DataCell(Text(widget.item['defesa']['physical'].toString())),
+                      DataCell(Text(widget.item['defesa']['magic'].toString())),
+                      DataCell(Text(widget.item['defesa']['fire'].toString())),
+                      DataCell(Text(widget.item['defesa']['lightining'].toString())),
+                      DataCell(Text(widget.item['defesa']['holy'].toString())),
+                      DataCell(Text(widget.item['defesa']['guardBoost'].toString())),
+                    ])
+
+                  ]),
+              SizedBox(height: 10,),
+              const Text('Como e onde encontrar ?',style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+              ),
+                textAlign: TextAlign.center,),
+              SizedBox(height: 20,),
+              SizedBox(
+
+                child:YoutubePlayer(
+                  controller: controller,
+                  liveUIColor: Colors.amber,
+                ) ,)
+
             ]
         )
     );
