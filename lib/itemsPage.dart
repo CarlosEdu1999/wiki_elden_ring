@@ -80,7 +80,7 @@ class _itemsRotaState extends State<itemsRota> {
                     mainAxisSpacing: 10,
                     crossAxisCount: 2,
                     children: <Widget>[
-                      for (var i =1;i< items.length;i++)
+                      for (var i =0;i< items.length;i++)
                         InkWell(
                             child: Container(
                                 padding: EdgeInsets.all(items.length.toDouble()),
