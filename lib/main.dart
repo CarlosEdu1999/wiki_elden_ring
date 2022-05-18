@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
+import 'package:permission_handler/permission_handler.dart';
 import 'itemsPage.dart';
+import 'package:photo_view/photo_view.dart';
 
 void main() {
+
   runApp(const MyApp());
 }
 
@@ -53,19 +55,33 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // final image = [
+  //   'assets/images/caelid.jpg',
+  //   'assets/images/Consecrated_Snowfield.jpg',
+  //   'assets/images/crumbling_farum_azula.jpg',
+  //   'assets/images/deeprot_depths.jpg',
+  //   'assets/images/lake_of_rot.jpg',
+  //   'assets/images/limgrave.jpg',
+  //   'assets/images/liurnia.jpg',
+  //   'assets/images/monta_dos_gigante.jpg',
+  //   'assets/images/plato_altus.jpg',
+  //   'assets/images/rio_siofa.jpg',
+  //   'assets/images/rio_ansiel.jpg',
+  //   'assets/images/weeping_peninsula.jpg'
+  // ];
   final image = [
-    'assets/images/caelid.jpg',
-    'assets/images/Consecrated_Snowfield.jpg',
-    'assets/images/crumbling_farum_azula.jpg',
-    'assets/images/deeprot_depths.jpg',
-    'assets/images/lake_of_rot.jpg',
-    'assets/images/limgrave.jpg',
-    'assets/images/liurnia.jpg',
-    'assets/images/monta_dos_gigante.jpg',
-    'assets/images/plato_altus.jpg',
-    'assets/images/rio_siofa.jpg',
-    'assets/images/rio_ansiel.jpg',
-    'assets/images/weeping_peninsula.jpg'
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/limgrave_reg_map_elden_ring_wiki_guide_1920px.jpg?v=1652594978719',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/weeping-peninsula_location_map_elden_ring_wiki_guide_2560px.jpg?v=1648027950824',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/liurnia_of_the_lakes_location_map_elden_ring_wiki_guide_2560px.jpg?v=1648030170450',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/siofra_river_location_map_elden_ring_wiki_guide_2560px.jpg?v=1647877354088',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/caelid_location_map_elden_ring_wiki_guide_2560px.jpg?v=1648008336140',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/altus_plateau_location_map_elden_ring_wiki_guide_2560px.jpg?v=1647583002486',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/mountaintops_of_the_giants_location_map_elden_ring_wiki_guide_2560px.jpg?v=1647590875551',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/consecrated_snowfield_location_map_elden_ring_wiki_guide_1920px.jpg?v=1647592652165',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/crumbling_farum_azula_location_map_elden_ring_wiki_guide_1920px.jpg?v=1647593867305',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/ainsel_river_location_map_elden_ring_wiki_guide_1920px.jpg?v=1647625959534',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/lake_of_rot_location_map_elden_ring_wiki_guide_1920px.jpg?v=1647626169089',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/deeproot_depths_location_map_elden_ring_wiki_guide_2560px.jpg?v=1647626370795'
   ];
   late YoutubePlayerController controller;
 
@@ -74,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const SecondRota()),
+        MaterialPageRoute(builder: (context) =>  SecondRota()),
       );
     });
   }
@@ -100,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
         disableDragSeek: false,
         loop: false,
         isLive: false,
-        forceHD: false,
+        forceHD: true,
         enableCaption: false,
       ),
     );
@@ -324,23 +340,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
   class SecondRota extends StatelessWidget {
-  const SecondRota({Key? key}) : super(key: key);
+   SecondRota({Key? key}) : super(key: key);
 
-  static var images = [
-  'assets/images/caelid.jpg',
-  'assets/images/Consecrated_Snowfield.jpg',
-  'assets/images/crumbling_farum_azula.jpg',
-  'assets/images/deeprot_depths.jpg',
-  'assets/images/lake_of_rot.jpg',
-  'assets/images/limgrave.jpg',
-  'assets/images/liurnia.jpg',
-  'assets/images/monta_dos_gigante.jpg',
-  'assets/images/plato_altus.jpg',
-  'assets/images/rio_siofa.jpg',
-  'assets/images/rio_ansiel.jpg',
-  'assets/images/weeping_peninsula.jpg'
+  final images = [
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/limgrave_reg_map_elden_ring_wiki_guide_1920px.jpg?v=1652594978719',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/weeping-peninsula_location_map_elden_ring_wiki_guide_2560px.jpg?v=1648027950824',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/liurnia_of_the_lakes_location_map_elden_ring_wiki_guide_2560px.jpg?v=1648030170450',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/siofra_river_location_map_elden_ring_wiki_guide_2560px.jpg?v=1647877354088',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/caelid_location_map_elden_ring_wiki_guide_2560px.jpg?v=1648008336140',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/altus_plateau_location_map_elden_ring_wiki_guide_2560px.jpg?v=1647583002486',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/mountaintops_of_the_giants_location_map_elden_ring_wiki_guide_2560px.jpg?v=1647590875551',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/consecrated_snowfield_location_map_elden_ring_wiki_guide_1920px.jpg?v=1647592652165',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/crumbling_farum_azula_location_map_elden_ring_wiki_guide_1920px.jpg?v=1647593867305',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/ainsel_river_location_map_elden_ring_wiki_guide_1920px.jpg?v=1647625959534',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/lake_of_rot_location_map_elden_ring_wiki_guide_1920px.jpg?v=1647626169089',
+    'https://eldenring.wiki.fextralife.com/file/Elden-Ring/deeproot_depths_location_map_elden_ring_wiki_guide_2560px.jpg?v=1647626370795'
   ];
-
   @override
   Widget build(BuildContext context) {
   return Scaffold(
@@ -365,7 +380,7 @@ class _MyHomePageState extends State<MyHomePage> {
   padding: EdgeInsets.all(images.length.toDouble()),
   decoration: BoxDecoration(
   image: DecorationImage(
-  fit: BoxFit.fill, image: AssetImage(item)),
+  fit: BoxFit.fill, image: NetworkImage(item) ),
   )),
   onTap: () {
   Navigator.push(context, MaterialPageRoute(builder: (_) {
@@ -396,7 +411,9 @@ class _MyHomePageState extends State<MyHomePage> {
   return Scaffold(
   body: GestureDetector(
   child: Center(
-  child: Image.asset(widget.image,scale: 0.5,)),
+
+  child: Container(
+  child: PhotoView( imageProvider: NetworkImage(widget.image,scale: 1,),))),
   onTap: () {
   Navigator.pop(context);
   },

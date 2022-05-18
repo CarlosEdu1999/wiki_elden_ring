@@ -143,7 +143,7 @@ class itemDetailScreenState extends State<itemDetail> {
         disableDragSeek: false,
         loop: false,
         isLive: false,
-        forceHD: false,
+        forceHD: true,
         enableCaption: false,
       ),
     );
